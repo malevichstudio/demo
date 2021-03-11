@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  frontend:
+    image: registry.blogyou.ru/blogyou-staging-frontend:latest
+    labels:
+      - traefik.backend=blogyou-frontend
+      - traefik.frontend.rule=Host:staging.blogyou.ru
+      - traefik.docker.network=traefik_proxy
+      - traefik.port=80
+      - traefik.enabled=true
+    networks:
+      - traefik
+    restart: always
+networks:
+  traefik:
+    external:
+      name: traefik_proxy
+    
